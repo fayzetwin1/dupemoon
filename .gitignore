@@ -1,0 +1,10 @@
+*.db
+vectors_data/
+*.jsonl
+uploads/
+*.log
+uv.lock
+.env
+*.gguf
+AGENTS.md
+__pycache__
