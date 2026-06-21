@@ -107,7 +107,7 @@ async def message_handler(message: types.Message):
         # Simple RAG: fetch facts from LanceDB
         # In a real system, use a separate prompt to extract facts from user text
         facts = search_facts(user_text)
-        context_facts = "\n".join([f.fact_text for f in facts])
+        context_facts = "\n".join([f.get("fact_text", "") for f in facts])
         
         # Fetch or create SystemConfig
         config_result = await session.execute(select(SystemConfig).limit(1))

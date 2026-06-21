@@ -2,12 +2,20 @@ import re
 import json
 from typing import Tuple, Optional, Dict, Any
 
+def strip_chinese(text: str) -> str:
+    """Removes any trailing hallucination starting from a Chinese character."""
+    match = re.search(r'[\u4e00-\u9fff]', text)
+    if match:
+        return text[:match.start()].strip()
+    return text
+
 def parse_thought(text: str) -> Tuple[str, str]:
     """
     Parses the raw LLM output, extracting the <thought> tag contents.
     Returns (raw_thoughts, final_output).
     If no tag is found, returns ('', text).
     """
+    text = strip_chinese(text)
     pattern = re.compile(r"<thought>(.*?)</thought>", re.DOTALL)
     
     match = pattern.search(text)

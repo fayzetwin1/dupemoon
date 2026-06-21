@@ -32,7 +32,11 @@ def init_vector_db():
 def add_fact(text: str, weight: float = 1.0):
     if tbl is None:
         return
-    tbl.add([UserFact(fact_text=text, importance_weight=weight).model_dump()])
+    tbl.add([{
+        "fact_text": text, 
+        "importance_weight": weight,
+        "created_at": datetime.now(timezone.utc)
+    }])
 
 def search_facts(query: str, limit: int = 5):
     if tbl is None:

@@ -97,7 +97,7 @@ async def generate_response(prompt: str, current_mood: float, system_config: Sys
         "options": {
             "temperature": 0.5,
             "num_predict": max_tokens,
-            "repeat_penalty": 1.15,
+            "repeat_penalty": 1.0,
             "stop": stop_tokens
         }
     }
